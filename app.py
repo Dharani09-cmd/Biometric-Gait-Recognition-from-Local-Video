@@ -5,7 +5,7 @@ import numpy as np
 import mediapipe as mp
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'videos'
+UPLOAD_FOLDER = '"C:\Users\priya\Downloads\walkingvideo.mp4"'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 mp_pose = mp.solutions.pose
