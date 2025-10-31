@@ -2,9 +2,9 @@ from flask import Flask, jsonify, request
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from scipy.misc import imresize, imread
+from PIL import Image
+import io, os
 from human_pose_nn import HumanPoseIRNetwork
-import os
 
 mpl.use('Agg')
 app = Flask(__name__)
@@ -26,10 +26,11 @@ def analyze():
     image_path = os.path.join('images', image_file.filename)
     image_file.save(image_path)
 
-    # Process image
-    img = imread(image_path)
-    img = imresize(img, [299, 299])
-    img_batch = np.expand_dims(img, 0)
+    # ✅ Replace deprecated SciPy with Pillow
+    img = Image.open(image_path).convert('RGB')
+    img = img.resize((299, 299))
+    img_array = np.array(img)
+    img_batch = np.expand_dims(img_array, 0)
 
     y, x, a = net_pose.estimate_joints(img_batch)
     y, x, a = np.squeeze(y), np.squeeze(x), np.squeeze(a)
