@@ -1,0 +1,11 @@
+Flask
+torch
+torchvision
+opencv-python
+numpy
+gunicorn
+pandas
+Pillow
+matplotlib
+scikit-learn
+tensorflow==1.15
