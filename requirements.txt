@@ -8,5 +8,5 @@ pandas
 Pillow
 matplotlib
 scikit-learn
-tensorflow
-keras
+tensorflow==1.15
+keras==2.2.4
