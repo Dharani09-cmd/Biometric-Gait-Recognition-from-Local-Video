@@ -15,7 +15,7 @@ net_pose.restore('models/MPII+LSP.ckpt')
 
 @app.route('/')
 def home():
-    return "✅ Biometric Gait Recognition API is running!"
+    return "✅ Biometric Gait Recognition API is running successfully!"
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
@@ -23,10 +23,11 @@ def analyze():
         return jsonify({'error': 'No image uploaded'}), 400
 
     image_file = request.files['image']
+    os.makedirs('images', exist_ok=True)
     image_path = os.path.join('images', image_file.filename)
     image_file.save(image_path)
 
-    # ✅ Replace deprecated SciPy with Pillow
+    # Process image
     img = Image.open(image_path).convert('RGB')
     img = img.resize((299, 299))
     img_array = np.array(img)
@@ -42,10 +43,9 @@ def analyze():
         'left shoulder', 'left elbow', 'left wrist'
     ]
 
-    # Return results as JSON
     results = {joint_names[i]: float(a[i]) for i in range(len(joint_names))}
     return jsonify(results)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-
+    # ✅ Use dynamic port on Render, fallback to safe unused port (5269) locally
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5269)))
