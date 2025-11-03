@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #0b0f19;
+  --card: #1b2233;
+  --accent: #3b82f6;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+}
+
+.navbar h1 {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.navbar button {
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.navbar button:hover { background: #2563eb; }
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.upload-card, .result-card {
+  background: var(--card);
+  padding: 30px 40px;
+  border-radius: 16px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.upload-card:hover, .result-card:hover {
+  transform: translateY(-5px);
+}
+
+input[type="file"] {
+  margin: 15px 0;
+  color: var(--muted);
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover { background: #2563eb; }
+
+footer {
+  text-align: center;
+  padding: 15px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+}
+
+.hidden { display: none; }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
